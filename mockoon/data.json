@@ -1,0 +1,94 @@
+{
+    "uuid": "1f70814c-9338-4b9b-b673-48ff50a2ffc0",
+    "lastMigration": 19,
+    "name": "DUMMY",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3012,
+    "hostname": "0.0.0.0",
+    "routes": [
+      {
+        "uuid": "1283f137-c80a-4344-a557-daa8b422202d",
+        "documentation": "",
+        "method": "post",
+        "endpoint": "login",
+        "responses": [
+          {
+            "uuid": "2280490c-208c-4963-9114-aae1ba9d948d",
+            "body": "{\n  \"message\": \"invalid credential\"\n}",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "Invalid credential",
+            "headers": [],
+            "filePath": "",
+            "sendFileAsBody": false,
+            "rules": [],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false
+          },
+          {
+            "uuid": "c5028e79-8989-498b-a196-363bc5b943a8",
+            "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.XbPfbIHMI6arZ3Y922BhjWgQzWXcXNrz0ogtVhfEd2o\"\n}",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "Success login",
+            "headers": [],
+            "filePath": "",
+            "sendFileAsBody": false,
+            "rules": [
+              {
+                "target": "body",
+                "modifier": "username",
+                "value": "admin",
+                "operator": "equals"
+              },
+              {
+                "target": "body",
+                "modifier": "password",
+                "value": "secret",
+                "operator": "equals"
+              }
+            ],
+            "rulesOperator": "AND",
+            "disableTemplating": false,
+            "fallbackTo404": false
+          }
+        ],
+        "enabled": true,
+        "randomResponse": false,
+        "sequentialResponse": false
+      }
+    ],
+    "proxyMode": false,
+    "proxyHost": "",
+    "proxyRemovePrefix": false,
+    "tlsOptions": {
+      "enabled": false,
+      "type": "CERT",
+      "pfxPath": "",
+      "certPath": "",
+      "keyPath": "",
+      "caPath": "",
+      "passphrase": ""
+    },
+    "cors": true,
+    "headers": [
+      {
+        "key": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "proxyReqHeaders": [
+      {
+        "key": "",
+        "value": ""
+      }
+    ],
+    "proxyResHeaders": [
+      {
+        "key": "",
+        "value": ""
+      }
+    ]
+  }
