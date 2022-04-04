@@ -40,7 +40,7 @@ const config: PlaywrightTestConfig = {
     trace: 'on-first-retry',
 
     // All requests we send go to this API endpoint.
-    baseURL: 'http://0.0.0.0:3012',
+    baseURL: 'https://reqres.in',
   },
 
   /* Configure projects for major browsers */

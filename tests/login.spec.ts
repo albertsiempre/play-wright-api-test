@@ -1,31 +1,41 @@
 import { test, expect } from '@playwright/test';
 
 test('should login success', async ({ request }) => {
-  const login = await request.post(`/login`, {
+  const login = await request.post(`/api/login`, {
     data: {
       username: `${process.env.LOGIN_USERNAME}`,
       password: `${process.env.LOGIN_PASSWORD}`,
     },
   });
 
-  console.log(`${process.env.LOGIN_PASSWORD}`)
   expect(login.ok()).toBeTruthy();
-  expect(await login.json()).not.toEqual(expect.objectContaining({
-      message: 'invalid credential'
-  }))
 });
 
-test('should login failed', async ({ request }) => {
-    const login = await request.post(`/login`, {
+test('should login failed user not found', async ({ request }) => {
+    const login = await request.post(`/api/login`, {
       data: {
         username: 'test',
         password: 'test',
       },
     });
     
-    expect(login.ok()).toBeTruthy();
+    expect(login.ok()).not.toBeTruthy();
     expect(await login.json()).toEqual(expect.objectContaining({
-        message: 'invalid credential'
+        error: 'user not found'
+    }))
+  });
+
+test('should login failed missing email or username', async ({ request }) => {
+    const login = await request.post(`/api/login`, {
+      data: {
+        username: '',
+        password: 'test',
+      },
+    });
+    
+    expect(login.ok()).not.toBeTruthy();
+    expect(await login.json()).toEqual(expect.objectContaining({
+        error: 'Missing email or username'
     }))
   });
 
