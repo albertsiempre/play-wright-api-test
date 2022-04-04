@@ -39,4 +39,17 @@ test('should login failed missing email or username', async ({ request }) => {
     }))
   });
 
+test('should login failed missing password', async ({ request }) => {
+    const login = await request.post(`/api/login`, {
+      data: {
+        username: `${process.env.LOGIN_USERNAME}`,
+      },
+    });
+    
+    expect(login.ok()).not.toBeTruthy();
+    expect(await login.json()).toEqual(expect.objectContaining({
+        error: 'Missing password'
+    }))
+  });
+
   
